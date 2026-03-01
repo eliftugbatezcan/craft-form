@@ -1,74 +1,40 @@
-# React + TypeScript + Vite
+# 🏗️ CraftForm: High-Performance Schema-Driven UI Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CraftForm** is a specialized low-code tool designed to eliminate the overhead of hardcoded form development. The project is built on the **Schema-Driven UI** architecture, where the interface is dynamically constructed based on an external data model (**JSON Schema**) rather than being hardcoded into the frontend logic.
 
-Currently, two official plugins are available:
+## 🛠️ Technical Implementation & Engineering Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **State Management (Zustand):** Implemented a centralized global state to ensure real-time synchronization between the form schema, organizational metadata, and UI visibility states (Preview/Publish).
+- **Drag & Drop Engine (@dnd-kit):** Leveraged `@dnd-kit/core` and `@dnd-kit/sortable` with custom sensor configurations to manage real-time layout reordering and field injections on the canvas.
+- **Dynamic Component Architecture:** Engineered a modular system where form fields (Text, Email, Date, Phone, etc.) are dynamically instantiated based on schema definitions.
+- **Custom Business Logic:** Developed specialized handling for international phone codes (`+90`) and custom date formats (`DD-MM-YYYY`) to overcome standard browser input limitations.
+- **Isolated Preview System:** Designed a simulated end-user environment using a modal-driven approach, allowing users to validate the form without disrupting the builder's state.
 
-## React Compiler
+## 💻 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React 18 (Functional Components & Hooks).
+- **Language:** TypeScript (Strict mode for type-safe schema definitions and interface hierarchy).
+- **State Management:** Zustand.
+- **Styling:** Tailwind CSS (Component-driven responsive design).
+- **Routing:** React Router DOM (Architectural separation of Landing and Builder routes).
 
-## Expanding the ESLint configuration
+## 🚀 Key Engineering Solutions Provided
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **White-Labeling Support:** Integrated an Organization Settings module that allows embedding corporate identity (Name & Logo) directly into the exported data.
+- **Type-Safe Schemas:** Defined robust `FormSchema` and `FormField` interfaces to ensure data integrity across the entire application lifecycle.
+- **Instant Portability:** Developed a "Publish" flow that delivers a complete JSON configuration ready for integration into any external frontend system.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+To run this project locally:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone the repository
+git clone [https://github.com/yourusername/craftform.git](https://github.com/yourusername/craftform.git)
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# craft-form
