@@ -1,6 +1,6 @@
-import React from 'react';
-import { useDraggable } from '@dnd-kit/core';
-import { CSS } from '@dnd-kit/utilities';
+import React from "react";
+import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
   type: string;
@@ -8,10 +8,9 @@ interface Props {
 }
 
 export const DraggableSidebarItem = ({ type, label }: Props) => {
-  // dnd-kit'in sihirli hook'u
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: `draggable-${type}`, 
-    data: { type },          
+    id: `draggable-${type}`,
+    data: { type },
   });
 
   const style = {

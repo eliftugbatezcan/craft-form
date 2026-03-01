@@ -1,4 +1,14 @@
-export type FieldType = 'text' | 'number' | 'email' | 'checkbox' | 'dropdown';
+export type FieldType =
+  | "text"
+  | "textarea"
+  | "full_name"
+  | "email"
+  | "checkbox"
+  | "address"
+  | "dropdown"
+  | "phone"
+  | "date"
+  | "header";
 
 export interface BaseField {
   id: string;
@@ -6,19 +16,53 @@ export interface BaseField {
   label: string;
   required: boolean;
   placeholder?: string;
+  helpText?: string;
+}
+
+export type DateFormat = "AA-GG-YYYY" | "GG-AA-YYYY" | "YYYY-AA-GG";
+
+export interface DateField extends BaseField {
+  type: "date";
+  dateFormat?: DateFormat;
+  showCalendar?: boolean;
+  defaultDate?: "none" | "current" | "custom";
 }
 
 export interface SelectionField extends BaseField {
-  type: 'dropdown';
-  options: string[];
+  type: "dropdown";
+  options: { label: string; value: string }[];
 }
 
-// 3. Union Type: Bir alan ya temel bir alandır ya da seçimli bir alandır
-// Bu yapı "Open/Closed" prensibine uygundur; yeni tipler eklemek çok kolaydır.
-export type FormField = BaseField | SelectionField;
+export interface PhoneField extends BaseField {
+  type: "phone";
+  countryCode?: string;
+  defaultCountryCode?: string;
+}
 
-// 4. Formun genel yapısı
+export interface HeaderField extends BaseField {
+  type: "header";
+  variant: "h1" | "h2" | "h3";
+}
+
+export interface AddressField extends BaseField {
+  type: "address";
+}
+
+export interface FullNameField extends BaseField {
+  type: "full_name";
+}
+
+export type FormField =
+  | BaseField
+  | SelectionField
+  | PhoneField
+  | HeaderField
+  | DateField
+  | AddressField
+  | FullNameField;
+
 export interface FormSchema {
   title: string;
+  description?: string;
   fields: FormField[];
 }

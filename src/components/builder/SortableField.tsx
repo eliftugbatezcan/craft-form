@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { FieldRenderer } from './FieldRenderer';
-import type { FormField } from '../../types/form';
-import { useFormStore } from '../../store/useFormStore';
+import React from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { FieldRenderer } from "./FieldRenderer";
+import type { FormField } from "../../types/form";
+import { useFormStore } from "../../store/useFormStore";
 
 interface Props {
   field: FormField;
@@ -11,7 +11,8 @@ interface Props {
 
 export const SortableField = ({ field }: Props) => {
   const { removeField } = useFormStore();
-  
+  const { selectField, selectedFieldId } = useFormStore();
+  const isSelected = selectedFieldId === field.id;
   const {
     attributes,
     listeners,
@@ -32,10 +33,10 @@ export const SortableField = ({ field }: Props) => {
     <div
       ref={setNodeRef}
       style={style}
+      onClick={() => selectField(field.id)}
       className="group relative p-5 border rounded-xl bg-white hover:border-blue-400 
                  transition-all duration-200 shadow-sm mb-4"
     >
-      {/* Sürükleme Tutamacı (Handle) */}
       <div
         {...attributes}
         {...listeners}
@@ -45,7 +46,7 @@ export const SortableField = ({ field }: Props) => {
         <span className="text-slate-400 text-xl">⋮⋮</span>
       </div>
 
-      <button 
+      <button
         onClick={() => removeField(field.id)}
         className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-white border border-slate-200
                    text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity flex 
