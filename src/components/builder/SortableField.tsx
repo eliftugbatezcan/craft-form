@@ -11,6 +11,7 @@ interface Props {
 export const SortableField = ({ field }: Props) => {
   const { removeField } = useFormStore();
   const { selectField, selectedFieldId } = useFormStore();
+  // @ts-ignore
   const isSelected = selectedFieldId === field.id;
   const {
     attributes,
