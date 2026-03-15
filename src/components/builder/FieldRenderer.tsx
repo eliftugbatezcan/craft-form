@@ -1,4 +1,3 @@
-import React from "react";
 import type { FormField, PhoneField, DateField } from "../../types/form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";

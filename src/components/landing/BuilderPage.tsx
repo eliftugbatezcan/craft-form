@@ -1,4 +1,3 @@
-import React from "react";
 import { DndContext, closestCorners, DragOverlay } from "@dnd-kit/core";
 import { Sidebar } from "../layout/Sidebar";
 import { Canvas } from "../../components/builder/Canvas";
